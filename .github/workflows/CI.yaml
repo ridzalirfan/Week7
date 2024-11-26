@@ -5,14 +5,15 @@ jobs:
   behave-testing:
   runs-on: ubuntu-latest
   
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
+  steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
       # This checks out the code from the repository so that the workflow can work on it.
-      run:
-        ls
+      - name: list repo
+        run:
+          ls
 
-    - name: Set up Python environment
-      uses: actions/setup-python@v5.3.0
-      with:
-        python-version: '3.9'  # Specify Python version (or any other version you need)
+      - name: Set up Python environment
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: '3.9'  # Specify Python version (or any other version you need)
