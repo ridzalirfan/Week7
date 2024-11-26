@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-      - uses: actions/checkout@v4
       - name: Checkout
         uses: actions/checkout@v4.2.2
       # This checks out the code from the repository so that the workflow can work on it.
@@ -38,12 +37,3 @@ jobs:
         with:
           name: test-results
           path: ./test-results/results.txt
-
-
-
-      - name: create an issue
-        uses: dacbd/create-issue-action@main
-        with:
-          token: ${{ github.token }}
-          title: Simple test issue
-          body: my new issue
