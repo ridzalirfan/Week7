@@ -3,9 +3,9 @@ run-name: ${{github.actor}} is learning GitHub Actions
 on: [push]
 jobs:
   behave-testing:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
   
-  steps:
+    steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
       # This checks out the code from the repository so that the workflow can work on it.
