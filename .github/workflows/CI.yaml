@@ -27,8 +27,9 @@ jobs:
       - name: Run Behave tests
         run: |
           source venv/bin/activate  # Activate the virtual environment
-          behave --format=xml --outfile ./test-results/results.xml
+          behave --format=xml --outfile ./test-results/results.xml  # Save results as XML
 
+      # Upload the test results as an artifact
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
