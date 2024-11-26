@@ -24,3 +24,6 @@ jobs:
           source venv/bin/activate  # Activate the virtual environment
           pip install --upgrade pip  # Upgrade pip to the latest version
           pip install behave  # Install Behave
+      - name: Run Behave
+        run: |
+          behave
