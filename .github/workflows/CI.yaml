@@ -4,10 +4,18 @@ on: [push]
 jobs:
   behave-testing:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
   
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
+      - name: create an issue
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: Simple test issue
+          body: my new issue
       # This checks out the code from the repository so that the workflow can work on it.
       - name: list repo
         run:
@@ -37,3 +45,5 @@ jobs:
         with:
           name: test-results
           path: ./test-results/results.txt
+
+
