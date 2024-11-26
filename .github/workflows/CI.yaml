@@ -1,42 +1,18 @@
 name: CI Pipeline
-
-# Trigger the workflow on push or pull request to main branch
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+run-name: ${{github.actor}} is learning GitHub Actions
+on: [push]
 jobs:
-  # Job to run tests
-  test:
-    runs-on: ubuntu-latest  # Specifies the OS to use (Ubuntu, a Linux distribution)
-    
-    # Steps to perform in this job
+  behave-testing:
+  runs-on: ubuntu-latest
+  
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v4.2.2
       # This checks out the code from the repository so that the workflow can work on it.
+      run:
+        ls
 
     - name: Set up Python environment
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5.3.0
       with:
-        python-version: '3.10'  # Specify Python version (or any other version you need)
-    
-    - name: Install dependencies
-      run: |
-        python -m venv venv
-        source venv/bin/activate  # Activate virtual environment
-        pip install -r requirements.txt  # Install necessary dependencies from your requirements file
-
-    - name: Install testing tools (e.g., Behave)
-      run: |
-        source venv/bin/activate
-        pip install behave  # Install Behave for BDD testing
-
-    - name: Run tests
-      run: |
-        source venv/bin/activate
-        behave  # Run the tests defined in your feature files using Behave
+        python-version: '3.9'  # Specify Python version (or any other version you need)
