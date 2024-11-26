@@ -37,3 +37,20 @@ jobs:
         with:
           name: test-results
           path: ./test-results/results.txt
+
+
+      - name: Check test results for issues and create an issue if any test fails
+        run: |
+          # Check if "failed" is found in the results.txt (you can adjust this search based on your test output)
+          if grep -q "failed" ./test-results/results.txt; then
+            echo "Tests failed. Creating GitHub issue..."
+            
+            # Use GitHub's REST API to create a new issue in the repository
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d '{"title": "Test Failures Detected in CI Pipeline", "body": "The Behave tests encountered failures. Please review the results in the artifacts for more details."}' \
+              https://api.github.com/repos/${{ github.repository }}/issues
+          else
+            echo "All tests passed successfully. No issues will be created."
+          fi
