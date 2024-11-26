@@ -17,3 +17,10 @@ jobs:
         uses: actions/setup-python@v5.3.0
         with:
           python-version: '3.9'  # Specify Python version (or any other version you need)
+
+      - name: Install Behave
+        run: |
+          python -m venv venv  # Create a virtual environment
+          source venv/bin/activate  # Activate the virtual environment
+          pip install --upgrade pip  # Upgrade pip to the latest version
+          pip install behave  # Install Behave
