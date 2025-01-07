@@ -65,7 +65,25 @@ jobs:
         run: |
           curl -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
           -d chat_id="${TELEGRAM_CHAT_ID}" \
-          -d text="🎉 Congratulations! The test run was successful. Commit pushed by: ${{ github.actor }} is working perfectly!"  
+          -d text="🎉 Congratulations! The test run was successful. Commit pushed by: ${{ github.actor }} is working perfectly!"
+
+          
+        #Step 7: CD (Prepare files for delivery/deployment)-individual name
+      - name: Prepare files
+        run: |
+          mkdir -p release
+          cp -r ./calculator.py ./release/calculator-ridzal.py
+          echo "Deployment files prepared."
+          ls -l ./release/
+      
+# Step 8: Upload files to AWS S3
+      - name: Upload to AWS S3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-1"
+        run: |
+          aws s3 cp ./release s3://devops-calculator-app/release-files --recursive
 
 
 
