@@ -86,4 +86,17 @@ jobs:
           aws s3 cp ./release s3://devops-calculator-app/release-files --recursive
 
 
+      - name: Send Discord Message on Test Success
+        if: success()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -X POST "${DISCORD_WEBHOOK_URL}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "content": "🎉 Congratulations! The test run was successful. Commit pushed by: **${{ github.actor }}** is working perfectly!"
+              }'
+
+
+
 
