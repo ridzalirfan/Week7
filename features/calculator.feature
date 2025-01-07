@@ -10,7 +10,7 @@ Feature: Calculator
 
 	Scenario: Subtraction
 		When I subtract 10 from 50
-		Then the result should be 41
+		Then the result should be 40
 
 	Scenario: Multiplication
 		When I multiply 5 and 3
